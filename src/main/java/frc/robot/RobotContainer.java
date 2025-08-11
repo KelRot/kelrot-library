@@ -4,11 +4,15 @@
 
 package frc.robot;
 
+import frc.robot.subsystems.Led;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
+  private final Led m_led = new Led();
 
   public RobotContainer() {
- 
+    m_led.setSolidColor(Color.kFirstRed, new Integer[] {2});
+
     configureBindings();
   }
 
