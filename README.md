@@ -4,7 +4,7 @@ This library hosts ready to use subsystems and code that are used in robots crea
 
 ## Important Contents
 
-[How to write a subsystem?](https://github.com/KelRot/2025-library/blob/led-subsystem/docs/Guide.md) - A Guide written by [elma](https://github.com/mekathegapple) explaining the process and details to write a clean and functional subsystem.
+[How to write a subsystem?](https://github.com/KelRot/2025-library/blob/main/docs/Guide.md) - A Guide written by [elma](https://github.com/mekathegapple) explaining the process and details to write a clean and functional subsystem.
 
 ## Subsystem List
 
