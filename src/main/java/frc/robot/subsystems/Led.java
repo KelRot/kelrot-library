@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LedConstants;
 
 public class Led extends SubsystemBase{ //a Java inheritance example
-
     private AddressableLED m_led;
     private AddressableLEDBuffer m_buffer;
-    private AddressableLEDBufferView m_group1, m_group2, m_group3;
+    private HashMap<Integer, AddressableLEDBufferView> m_groupList;
     private HashMap<Integer, LEDPattern> m_patternList;
+    private LEDPattern k_defaultPattern = LEDPattern.solid(Color.kBlack);
 
     public Led() {
         m_led = new AddressableLED(LedConstants.kLedPort); //every variable you might change later (ports, length etc.) should be added to Constants.java*
@@ -27,20 +27,16 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         m_led.setLength(LedConstants.kLedLength); //setting the length takes a lot of load so do it only one time when possible
         m_led.start();
         
-        //Create led groups (views)
-        m_group1 = m_buffer.createView(0, 19); //in a 60 led strip, first LED is index 0 and the last led is index 59
-        m_group2 = m_buffer.createView(20, 39);
-        m_group3 = m_buffer.createView(40, 59);
-
-
-        LEDPattern defaultPattern = LEDPattern.solid(Color.kBlack); //off/all black pattern
+        m_groupList = new HashMap<Integer, AddressableLEDBufferView>(); //I decided to use Integers for the keys as it is much more straight-forward, in future uses the keys can be String's for more complicated group identification needs.
         m_patternList = new HashMap<Integer, LEDPattern>(); //For this version of grouping we need to store previous patterns for each group
-        m_patternList.put(1, defaultPattern);
-        m_patternList.put(2, defaultPattern);
-        m_patternList.put(3, defaultPattern);
-        //I decided to use Integers for the keys as it is much more straight-forward, in future uses the keys can be String's for more complicated group identification needs.
 
-        setDefaultCommand(runPattern(defaultPattern).withName("Off")); //set all leds to off/black on start
+        setDefaultCommand(runPattern(k_defaultPattern).withName("Off")); //set all leds to off/black on start
+    }
+
+    public void createGroup(int startingIndex, int endingIndex, Integer groupID) {
+        AddressableLEDBufferView group = m_buffer.createView(startingIndex, endingIndex);
+        m_groupList.put(groupID, group);
+        m_patternList.put(groupID, k_defaultPattern);
     }
 
     public void setSolidColor(Color color, Integer[] groupIDs){
@@ -75,10 +71,10 @@ public class Led extends SubsystemBase{ //a Java inheritance example
     }
 
     public Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
-        return run(() -> { //there might be a way to write this cleaner
-            m_patternList.get(1).applyTo(m_group1);
-            m_patternList.get(2).applyTo(m_group2);
-            m_patternList.get(3).applyTo(m_group3);
+        return run(() -> {
+            for (Integer i : m_groupList.keySet()) {
+                m_patternList.get(i).applyTo(m_groupList.get(i));
+            }
         });
     }
 
