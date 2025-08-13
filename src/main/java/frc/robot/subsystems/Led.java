@@ -33,10 +33,10 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         setDefaultCommand(runPattern(k_defaultPattern).withName("Off")); //set all leds to off/black on start
     }
 
-    public void createGroup(int startingIndex, int endingIndex, Integer groupID) {
-        AddressableLEDBufferView group = m_buffer.createView(startingIndex, endingIndex);
+    public void createGroup(int startingIndex, int endingIndex, Integer groupID) { //infinite amount of groups creatable, without complicating the code
+        AddressableLEDBufferView group = m_buffer.createView(startingIndex, endingIndex); //create new group(view)
         m_groupList.put(groupID, group);
-        m_patternList.put(groupID, k_defaultPattern);
+        m_patternList.put(groupID, k_defaultPattern); //initially set the defaultPattern, so the runPattern command doesn't break
     }
 
     public void setSolidColor(Color color, Integer[] groupIDs){
@@ -72,8 +72,8 @@ public class Led extends SubsystemBase{ //a Java inheritance example
 
     public Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
         return run(() -> {
-            for (Integer i : m_groupList.keySet()) {
-                m_patternList.get(i).applyTo(m_groupList.get(i));
+            for (Integer i : m_groupList.keySet()) { //parsing through every key in the groupList HashMap
+                m_patternList.get(i).applyTo(m_groupList.get(i)); //getting every setted pattern and applying it to the ID'd LED Group
             }
         });
     }
