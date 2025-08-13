@@ -4,13 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.kelrotlib.leds.Led;
+import frc.robot.subsystems.LedSubsystem;
 public class RobotContainer {
 
+  private final LedSubsystem leds = new LedSubsystem();
+
   public RobotContainer() {
- 
     configureBindings();
+    leds.setSolidColor(Color.kFirstBlue, new Integer[] {1});
   }
 
   private void configureBindings() {
