@@ -66,8 +66,7 @@ public class Led extends SubsystemBase{ //a Java inheritance example
     }
 
     public void turnOff(){
-        Integer[] groupIDs = {1,2,3}; // TRY: if we can apply to the buffer to use the whole led strip or not, if not remove 2nd runPattern function
-        setSolidColor(Color.kBlack, groupIDs); //instead of creating another pattern and using runPattern etc., it is usually better to use already existing functions
+        runPattern(k_defaultPattern);
     }
 
     public Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
