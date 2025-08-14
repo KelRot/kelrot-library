@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LedConstants;
 
-public class Led extends SubsystemBase{ //a Java inheritance example
+public class Led extends SubsystemBase { //a Java inheritance example
     private AddressableLED m_led;
     private AddressableLEDBuffer m_buffer;
     private HashMap<Integer, AddressableLEDBufferView> m_groupList;
