@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.kelrotlib.utils.TunableNumber;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LedSubsystem;
+import frc.robot.subsystems.TunableNumberExample;
 public class RobotContainer {
 
   private final LedSubsystem leds = new LedSubsystem();
-  private final ExampleSubsystem example = new ExampleSubsystem();
+  private final TunableNumberExample example = new TunableNumberExample();
   public RobotContainer() {
     configureBindings();
     leds.setSolidColor(Color.kFirstBlue, new Integer[] {1});
