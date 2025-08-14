@@ -1,7 +1,7 @@
-//hellooo
 package frc.kelrotlib.utils;
 
 import edu.wpi.first.networktables.*;
+import frc.robot.Constants;
 import dev.doglog.DogLog;
 
 import java.util.EnumSet;
@@ -13,7 +13,7 @@ public class TunableNumber {
     private NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
 
-        /**
+    /**
      * @param key          
      * @param defaultValue 
      * @param onChange     
@@ -31,7 +31,7 @@ inst.addListener(
         EnumSet.of(NetworkTableEvent.Kind.kValueAll),
         event -> {
         double newValue = entry.getDouble(lastValue);
-          if(this.lastValue != newValue) {
+          if(this.lastValue != newValue && Constants.tuningMode) {
             DogLog.log("/Tuning" + "/" + key, entry.getDouble(lastValue));
             System.out.println(newValue);
             this.lastValue = newValue;
@@ -58,7 +58,7 @@ inst.addListener(
         EnumSet.of(NetworkTableEvent.Kind.kValueAll),
         event -> {
         double newValue = entry.getDouble(lastValue);
-          if(this.lastValue != newValue) {
+          if(this.lastValue != newValue && Constants.tuningMode) {
             DogLog.log("/Tuning" + "/" + key, entry.getDouble(lastValue));
             System.out.println(newValue);
             this.lastValue = newValue;
@@ -67,8 +67,8 @@ inst.addListener(
 
     }
 
-    /** Şu an dashboard’daki güncel değeri döner */
+    /* Return last value on the dashboard */
     public double get() {
-        return entry.getDouble(lastValue);
+        return lastValue;
     }
 }
