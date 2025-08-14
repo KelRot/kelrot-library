@@ -69,7 +69,7 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         runPattern(k_defaultPattern);
     }
 
-    public Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
+    private Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
         return run(() -> {
             for (Integer i : m_groupList.keySet()) { //parsing through every key in the groupList HashMap
                 m_patternList.get(i).applyTo(m_groupList.get(i)); //getting every setted pattern and applying it to the ID'd LED Group
@@ -77,7 +77,7 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         });
     }
 
-    public Command runPattern(LEDPattern pattern) { //might get removed later.
+    private Command runPattern(LEDPattern pattern) { //might get removed later.
         return run(() -> {
             pattern.applyTo(m_buffer);
         });
