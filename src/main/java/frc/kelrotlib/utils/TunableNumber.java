@@ -36,6 +36,8 @@ inst.addListener(
             System.out.println(newValue);
             this.lastValue = newValue;
             onChange.accept(lastValue);
+          } else { 
+            entry.setDouble(this.lastValue);
           }
         });
     }
@@ -62,6 +64,8 @@ inst.addListener(
             DogLog.log("/Tuning" + "/" + key, entry.getDouble(lastValue));
             System.out.println(newValue);
             this.lastValue = newValue;
+          } else { 
+            entry.setDouble(this.lastValue);
           }
         });
 
