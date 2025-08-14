@@ -16,7 +16,7 @@ reviewers:
 
 # Number of reviewers to add randomly per PR
 # 0 = add everyone
-numberOfReviewers: 2
+numberOfReviewers: 0
 
 # Skip adding reviewers if PR title has these words
 skipKeywords:
