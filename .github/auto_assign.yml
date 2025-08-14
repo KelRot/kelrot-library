@@ -1,0 +1,28 @@
+# .github/auto_assign.yml
+
+# Automatically add reviewers to pull requests
+addReviewers: true
+
+# Also assign the person who opened the PR
+addAssignees: author
+
+# List of reviewers (GitHub usernames)
+reviewers:
+  - exeokan
+  - recepsirin0
+  - mekathegapple
+  - mert577
+  - mychecksdead
+
+# Number of reviewers to add randomly per PR
+# 0 = add everyone
+numberOfReviewers: 0
+
+# Skip adding reviewers if PR title has these words
+skipKeywords:
+  - wip
+  - draft
+
+# Skip these users entirely
+skipUsers:
+  - dependabot[bot]
