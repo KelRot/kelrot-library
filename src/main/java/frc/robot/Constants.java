@@ -5,5 +5,7 @@
 package frc.robot;
 
 public final class Constants {
-  
+
+    public static boolean tuningMode = true;
+    
 }
