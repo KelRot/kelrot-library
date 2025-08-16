@@ -1,6 +1,6 @@
 package frc.robot.subsystems;
 
-import frc.kelrotlib.leds.ExampleLibrary;
+import frc.kelrotlib.example.ExampleLibrary;
 
 public class ExampleLibrarySubsystem extends ExampleLibrary {
 
