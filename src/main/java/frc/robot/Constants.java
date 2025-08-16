@@ -4,10 +4,8 @@
 
 package frc.robot;
 
-import static edu.wpi.first.units.Units.Meters;
-
-import edu.wpi.first.units.measure.Distance;
-
 public final class Constants {
-    public static boolean tuningMode = false; 
+
+    public static boolean tuningMode = true;
+    
 }
