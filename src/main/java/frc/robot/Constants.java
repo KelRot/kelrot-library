@@ -10,10 +10,4 @@ import edu.wpi.first.units.measure.Distance;
 
 public final class Constants {
     public static boolean tuningMode = false; 
-    public static class LedConstants {
-        public static final int kLedPort = 6; // PWM port on RoborIO
-        public static final int kLedLength = 60; // led count
-        public static final Distance kLedSpacing = Meters.of(1 / 60.0); // density of 120 LEDs per meter
-    }
-
 }

@@ -11,12 +11,9 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.TunableNumberExample;
 public class RobotContainer {
-
-  private final LedSubsystem leds = new LedSubsystem();
   private final TunableNumberExample yTunableNumberExample = new TunableNumberExample();
   public RobotContainer() {
     configureBindings();
-    leds.setSolidColor(Color.kFirstBlue, new Integer[] {1});
   }
 
   private void configureBindings() {
