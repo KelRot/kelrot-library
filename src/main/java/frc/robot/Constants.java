@@ -13,6 +13,12 @@ public final class Constants {
     public static final int kLedPort = 6; //PWM port on RoborIO
     public static final int kLedLength = 60; //led count
     public static final Distance kLedSpacing = Meters.of(1/ 60.0); // density of 120 LEDs per meter
+    public static final int[][] kledGroups = {
+      new int[] {0,1}, //group 0
+      new int[] {2,3}, // group 1
+      new int[] {4,5} // group 2
+    };
+
   }
   
 }

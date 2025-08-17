@@ -4,17 +4,15 @@
 
 package frc.robot;
 
+import frc.robot.Constants.LedConstants;
 import frc.robot.subsystems.LedSubsystem;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
-  private final LedSubsystem m_led = new LedSubsystem();
+  private final LedSubsystem m_led = new LedSubsystem(LedConstants.kledGroups);
 
   public RobotContainer() {
-    m_led.createGroup(0, 29, 1); //indexing: in a 60 led strip, first LED is index 0 and the last led is index 59
-    m_led.createGroup(30, 59, 2);
-
-    m_led.setSolidColor(Color.kFirstBlue, new Integer[] {1,2}); //The library Color includes many color presets, but it is also possible to use RGB values to create "Color"s
+    m_led.setSolidColor(Color.kFirstBlue, new int[] {1,2}); //The library Color includes many color presets, but it is also possible to use RGB values to create "Color"s
 
     configureBindings();
   }
