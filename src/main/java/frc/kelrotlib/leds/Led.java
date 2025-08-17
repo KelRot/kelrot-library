@@ -19,7 +19,6 @@ public class Led extends SubsystemBase{ //a Java inheritance example
     private LEDPattern[] m_patternList;
 
     private LEDPattern k_defaultPattern;
-    private final int[][] k_ledGroups;
 
     public Led(int[][] ledGroups) {
         m_led = new AddressableLED(LedConstants.kLedPort); //every variable you might change later (ports, length etc.) should be added to Constants.java*
@@ -28,8 +27,10 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         m_led.start();
         
         k_defaultPattern = LEDPattern.solid(Color.kBlack);
-        k_ledGroups = ledGroups;
-        for (int[] i : k_ledGroups) { //create groups based on the ledGroups array
+        
+        m_groupList = new AddressableLEDBufferView[ledGroups.length]; //create a new groupList with the same length as the ledGroups array
+        m_patternList = new LEDPattern[ledGroups.length]; //create a new patternList with the same length as the ledGroups array
+        for (int[] i : ledGroups) { //create groups based on the ledGroups array
             createGroup(i[0], i[1]); 
         }
 
@@ -42,28 +43,29 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         m_patternList[m_patternList.length] = k_defaultPattern; //add the default pattern to the patternList
     }
 
-    public void setSolidColor(Color color, int[] groupIndexes){
+    public void setSolidColor(Color color, int[] groupIDs){
         LEDPattern solidColorPattern = LEDPattern.solid(color);
-        for (int i = 0; i < groupIndexes.length; i++) { //update the latest pattern for every LED group given
-            m_patternList[groupIndexes[i]] = solidColorPattern; //replace the pattern for the groupID with the new solid color pattern
+        for (int i = 0; i < groupIDs.length; i++) { //update the latest pattern for every LED group given
+            m_patternList[groupIDs[i]] = solidColorPattern; //replace the pattern for the groupID with the new solid color pattern
         }
         runPattern();
     }
 
-    public void setBlinkColor(Color color, double interval, int[] groupIndexes){
+    public void setBlinkColor(Color color, double interval, int[] groupIDs){
         LEDPattern base = LEDPattern.solid(color);
         LEDPattern blinkPattern = base.blink(Seconds.of(interval)); //synchronised blink, wpilib also has support for asynchronised blink
-        for (int i = 0; i < groupIndexes.length; i++) {
-            m_patternList[groupIndexes[i]] =  blinkPattern;
+        for (int i = 0; i < groupIDs.length; i++) {
+            m_patternList[groupIDs[i]] =  blinkPattern;
         }
+        
         runPattern();
     }
 
-    public void rainbow(int[] groupIndexes){
+    public void rainbow(int[] groupIDs){
         LEDPattern rainbow = LEDPattern.rainbow(255, 128); //all hues at maximum saturation and *half* brightness
         LEDPattern scrollingRainbow = rainbow.scrollAtAbsoluteSpeed(MetersPerSecond.of(1), LedConstants.kLedSpacing); //moves/scrolls the effect at a speed of 1 meter per second
-        for (int i = 0; i < groupIndexes.length; i++) {
-            m_patternList[groupIndexes[i]] = scrollingRainbow;
+        for (int i = 0; i < groupIDs.length; i++) {
+            m_patternList[groupIDs[i]] = scrollingRainbow;
         }
         runPattern();
     }
