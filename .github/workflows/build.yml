@@ -1,6 +1,6 @@
 # This is a basic workflow to build robot code.
 
-name: CI
+name: build
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the main branch.
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # This grabs the WPILib docker container
-    container: wpilib/roborio-cross-ubuntu:2024-22.04
+    container: wpilib/roborio-cross-ubuntu:2025-22.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
