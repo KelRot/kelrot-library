@@ -30,17 +30,17 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         
         m_groupList = new AddressableLEDBufferView[ledGroups.length]; //create a new groupList with the same length as the ledGroups array
         m_patternList = new LEDPattern[ledGroups.length]; //create a new patternList with the same length as the ledGroups array
-        for (int[] i : ledGroups) { //create groups based on the ledGroups array
-            createGroup(i[0], i[1]); 
+        for (int i = 0; i < ledGroups.length; i++) {
+            createGroup(ledGroups[i][0], ledGroups[i][1], i);
         }
 
         setDefaultCommand(runPattern(k_defaultPattern).withName("Off")); //set all leds to off/black on start
     }
 
-    public void createGroup(int startingIndex, int endingIndex) {
+    public void createGroup(int startingIndex, int endingIndex, int groupID) {
         AddressableLEDBufferView group = m_buffer.createView(startingIndex, endingIndex); //create new group(view)
-        m_groupList[m_groupList.length] = group; //add the group to the groupList
-        m_patternList[m_patternList.length] = k_defaultPattern; //add the default pattern to the patternList
+        m_groupList[groupID] = group; //add the group to the groupList
+        m_patternList[groupID] = k_defaultPattern; //add the default pattern to the patternList
     }
 
     public void setSolidColor(Color color, int[] groupIDs){
