@@ -1,6 +1,11 @@
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2025.2.1"
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '10.12.0' // Güncel sürüm
 }
 
 java {
