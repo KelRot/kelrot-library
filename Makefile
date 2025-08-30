@@ -8,10 +8,7 @@ build:
 test:
 	./gradlew test
 
-# Check lint (Spotless)
+# Check lint (checkstyle)
 lint-check:
-	./gradlew spotlessCheck
-
-# (Optional) Auto-fix lint
-lint-fix:
-	./gradlew spotlessApply
+	./gradlew checkStyleMain
+# You can see the errors on build/reports/checkstyle, open the html file on browser then you can fix it easily.
