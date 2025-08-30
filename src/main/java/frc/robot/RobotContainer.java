@@ -12,12 +12,15 @@ public class RobotContainer {
   private final LedSubsystem m_led = new LedSubsystem(LedConstants.kledGroups);
 
   public RobotContainer() {
-    m_led.setSolidColor(Color.kFirstBlue, new int[] {1,2}); //The library Color includes many color presets, but it is also possible to use RGB values to create "Color"s
-
+    m_led.setBlinkColor(Color.kRed, 3, new int[]{0,1,2});
     configureBindings();
   }
 
   private void configureBindings() {
+  }
+
+  public LedSubsystem getLedSubsystem() {
+    return m_led;
   }
 
   public Command getAutonomousCommand() {

@@ -48,7 +48,7 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         for (int i = 0; i < groupIDs.length; i++) { //update the latest pattern for every LED group given
             m_patternList[groupIDs[i]] = solidColorPattern; //replace the pattern for the groupID with the new solid color pattern
         }
-        runPattern();
+        runPattern().schedule();
     }
 
     public void setBlinkColor(Color color, double interval, int[] groupIDs){
@@ -57,8 +57,7 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         for (int i = 0; i < groupIDs.length; i++) {
             m_patternList[groupIDs[i]] =  blinkPattern;
         }
-        
-        runPattern();
+        runPattern().schedule();
     }
 
     public void rainbow(int[] groupIDs){
@@ -67,29 +66,29 @@ public class Led extends SubsystemBase{ //a Java inheritance example
         for (int i = 0; i < groupIDs.length; i++) {
             m_patternList[groupIDs[i]] = scrollingRainbow;
         }
-        runPattern();
+        runPattern().schedule();
     }
 
     public void turnOff(){
-        runPattern(k_defaultPattern);
+        setSolidColor(Color.kBlack, new int[] {0, 1, 2}); //turn off all LEDs by setting them to black
     }
 
-    private Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
+    public Command runPattern(){  //A command is used as it doesn't allow actions to run simultaneously, for this usage it is crucial, because we need to stop the previous patterns and start the new ones.
         return run(() -> {
             for (int i = 0; i < m_groupList.length; i++) {
                 m_patternList[i].applyTo(m_groupList[i]); //apply the pattern to the group
             }
-        });
+        }).ignoringDisable(true);
     }
 
-    private Command runPattern(LEDPattern pattern) { //might get removed later.
+    private Command runPattern(LEDPattern pattern) {
         return run(() -> {
             pattern.applyTo(m_buffer);
-        });
+        }).ignoringDisable(true);
     }
 
     @Override
-    public void periodic() { //update the data every 20ms
+    public void periodic() { 
         m_led.setData(m_buffer);
     }
   
