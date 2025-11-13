@@ -40,7 +40,6 @@ public class TunableNumber {
                     // If the value changed and tuningMode is ON, accept the change
                     if(this.lastValue != newValue && Constants.tuningMode) {
                         DogLog.log("/Tuning" + "/" + key, entry.getDouble(lastValue));
-                        System.out.println(newValue);
                         this.lastValue = newValue;
                         onChange.accept(lastValue); // call the callback
                     } else { 
@@ -76,7 +75,6 @@ public class TunableNumber {
                     // If the value changed and tuningMode is ON, accept the change
                     if(this.lastValue != newValue && Constants.tuningMode) {
                         DogLog.log("/Tuning" + "/" + key, entry.getDouble(lastValue));
-                        System.out.println(newValue);
                         this.lastValue = newValue;
                     } else { 
                         // Otherwise, reset the value to the last known value
