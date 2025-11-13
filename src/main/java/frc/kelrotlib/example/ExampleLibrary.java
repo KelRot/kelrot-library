@@ -4,11 +4,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleLibrary extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public ExampleLibrary() {
-  }
+  public ExampleLibrary() {}
 
-  public void exampleMethod() {
-  }
+  public void exampleMethod() {}
 
   @Override
   public void periodic() {
